@@ -1,5 +1,4 @@
 import 'package:test/test.dart';
-import 'package:meta/meta.dart';
 
 import '../lib/rank.dart';
 
