@@ -23,6 +23,7 @@ void main() {
     'Rank generate',
     () {
       late Rank rank;
+
       List<TestModel> valuesList = [];
 
       // Values for generated test
@@ -171,7 +172,7 @@ void main() {
 
   group('Rank sufix', () {
     late Rank rank;
-
+    
     List<TestModel> valuesList = [];
     valuesList.add(TestModel(prev: '', next: '', expected: 'ñ'));
     valuesList.add(TestModel(prev: 'l', next: '', expected: 'r'));
