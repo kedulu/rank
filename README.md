@@ -2,35 +2,60 @@
 
 A Dart package that helps to implement a string index.
 
-## Installation
-
-```yaml
-dependencies:
-  rank: ^0.0.1
-```
-
 ## Overview
-Before:
+__Before:__
 ```dart
-class Person {
-  const Person(..., this.previousId, nextId);
+class Element {
+  const Element(..., this.position);
+
   ...
-  final String previousId;
-  final String nextId;
+  final int position;  // 4
 }
 ```
-Using `rank`
+With a order number based ranking system, re-ordering a element of a list may require updating all elements of the list, which is O(n).
+
+| element   | position              |
+|-----------|-----------------------|
+| ...     | ...                 |
+| apple     | 3                     |
+| __from _ to here__          | Oh ho! <br> No room between 3 and 4. |
+| pear      | 4                     |
+| raspberry | 5                     |
+
+Well, let's try adding zeros.
+
+| element   | position              |
+|-----------|-----------------------|
+| ...     | ...                 |
+| apple     | 300                     |
+| __from _ to here__          | Now, you can add 99 elements <br> before changing anything. |
+| pear      | 400                     |
+| raspberry | 500                     |
+
+What if we don't use numbers?
+
+__Using__ `rank`
 ```dart
-class Person {
-  const Person(..., this.rank);
+class Element {
+  const Element(..., this.rank);
   ...
-  final String rank;
+  final String rank; // knar
 }
 ```
-then, you could perform this query in your database:
+Using a string-based range, this is done with O(1). All you have to do is to update the rank field of the reordered element.
+
+| element   | rank              |
+|-----------|-----------------------|
+| ...     | ...                 |
+| apple     | kra                     |
+| __a sweet fruit added__   | kran |
+| pear      | krb                     |
+| raspberry | krc                     |
+
+then, to get your sorted list you could perform this query in your database:
 
 ```sql
-SELECT * FROM "_" ORDER BY "RANK";
+SELECT * FROM "_" ORDER BY "rank";
 ```
 
 ## Usage
@@ -41,19 +66,30 @@ dependencies:
   rank: ^0.0.1
 ```
 
+Import `rank` in files that it will be used:
+
+```dart
+import 'package:rank/rank.dart';
+```
+
+Next, you must initialize the plugin:
+
+```dart
+Rank rank = Rank();
+```
+
 To get a rank use `generate`
 
 ```dart
-rank.generate(previous: previousRank, next:nextRank);
+sweetFruitRank = rank.generate(previous: appleRank, next: pearRank);
 ```
-That's all, for now.
 
 ## Issues
 
-Please file any issues, bugs or feature request as an issue on our GitHub page.
+Please file any issues, bugs or feature request as an [issue](https://github.com/kedulu/rank/issues) on our GitHub page.
 
 ## Contributing
 
-If you would like to contribute to the plugin (_e.g._ by improving the documentation, solving a bug or adding a cool new feature or you'd like an easier or better way to do something), consider opening a pull request. 
+If you would like to contribute to the plugin (_e.g._ by improving the documentation, solving a bug or adding a cool new feature or you'd like an easier or better way to do something), consider opening a [pull request](https://github.com/kedulu/rank/pulls). 
 
 
