@@ -39,7 +39,7 @@ __Using__ `rank`
 class Element {
   const Element(..., this.rank);
   ...
-  final String rank; // knar
+  final String rank; // kran
 }
 ```
 Using a string-based range, this is done with O(1). All you have to do is to update the rank field of the reordered element.
@@ -52,7 +52,9 @@ Using a string-based range, this is done with O(1). All you have to do is to upd
 | pear      | krb                     |
 | raspberry | krc                     |
 
-then, to get your sorted list you could perform this query in your database:
+Now, you can add any element anywhere.
+
+Then, to get your sorted list you could perform this query in your database:
 
 ```sql
 SELECT * FROM "_" ORDER BY "rank";
@@ -63,7 +65,7 @@ SELECT * FROM "_" ORDER BY "rank";
 First, add the plugin `rank` to your `pubspec.yaml` file:
 ```yaml
 dependencies:
-  rank: ^0.0.1
+  rank: ^0.1.0
 ```
 
 Import `rank` in files that it will be used:

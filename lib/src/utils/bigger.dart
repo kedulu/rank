@@ -2,7 +2,7 @@ enum Bigger { PREV, BOTH, NEXT }
 
 extension Actions on Bigger {
   void biggest(
-      {Function prev = null, Function next = null, Function both = null}) {
+      {Function? prev = null, Function? next = null, Function? both = null}) {
     switch (this) {
       case Bigger.PREV:
         prev;

@@ -7,7 +7,7 @@ class TestModel {
   final String prev, next, expected;
 
   TestModel(
-      {@required this.prev, @required this.next, @required this.expected});
+      {required this.prev, required this.next, required this.expected});
 }
 
 class TestSplitModel {
@@ -15,14 +15,14 @@ class TestSplitModel {
   final List<String> expected;
 
   TestSplitModel(
-      {@required this.prev, @required this.next, @required this.expected});
+      {required this.prev, required this.next, required this.expected});
 }
 
 void main() {
   group(
     'Rank generate',
     () {
-      Rank rank;
+      late Rank rank;
       List<TestModel> valuesList = [];
 
       // Values for generated test
@@ -87,7 +87,7 @@ void main() {
   );
 
   group('Split by shorter', () {
-    Rank rank;
+    late Rank rank;
     List<TestSplitModel> valuesList = [];
 
     valuesList.add(
@@ -145,7 +145,7 @@ void main() {
   group(
     'Rank prefix',
     () {
-      Rank rank;
+      late Rank rank;
 
       List<TestModel> valuesList = [];
       valuesList.add(TestModel(prev: '', next: '', expected: ''));
@@ -170,7 +170,7 @@ void main() {
   );
 
   group('Rank sufix', () {
-    Rank rank;
+    late Rank rank;
 
     List<TestModel> valuesList = [];
     valuesList.add(TestModel(prev: '', next: '', expected: 'ñ'));
