@@ -1,13 +1,12 @@
 library rank;
 
 import 'package:rank/src/utils/utils.dart';
-import 'package:meta/meta.dart';
 
 class ResultPrefix {
   final String response;
   final bool hasSuffix;
 
-  ResultPrefix({@required this.response, @required this.hasSuffix});
+  ResultPrefix({required this.response, required this.hasSuffix});
 }
 
 class Rank {
@@ -68,7 +67,8 @@ class Rank {
   /// Split the [larger] element, so that it fits in length to the [shorter] element,
   /// returns a list with the [bigger] element cut, the [shorter] element
   /// and if it exists, the first residue char of the [bigger].
-  List<String> splitByShorter({String bigger, String shorter}) {
+  List<String> splitByShorter(
+      {required String bigger, required String shorter}) {
     int limit = shorter.length;
     List<String> response = [];
 
@@ -84,7 +84,9 @@ class Rank {
 
   /// Compare two strings by your length and return a list
   /// with the bigger and shorter.
-  List<String> orderByLength({String one, String two}) {
+
+  List<String> orderByLength({required String one, required String two}) {
+
     if (one.length > two.length) {
       return [one, two];
     } else {
