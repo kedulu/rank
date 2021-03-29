@@ -81,18 +81,6 @@ Next, you must initialize the plugin:
 Rank rank = Rank();
 ```
 
-Import `rank` in files that it will be used:
-
-```dart
-import 'package:rank/rank.dart';
-```
-
-Next, you must initialize the plugin:
-
-```dart
-Rank rank = Rank();
-```
-
 To get a rank use `generate`
 
 ```dart
