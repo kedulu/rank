@@ -60,8 +60,6 @@ class Rank {
       //var suff = next.substring(next.length - 1);
 
       return pref + wildcard + alphabet.mean();
-
-      //rankGenerated += alphabet.first() + alphabet.mean();
     }
 
     var resultPrefix = prefix(splitted[2], splitted[0]);
