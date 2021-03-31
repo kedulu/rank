@@ -1,12 +1,10 @@
+import 'package:rank/rank.dart';
 import 'package:test/test.dart';
-
-import '../lib/rank.dart';
 
 class TestModel {
   final String prev, next, expected;
 
-  TestModel(
-      {required this.prev, required this.next, required this.expected});
+  TestModel({required this.prev, required this.next, required this.expected});
 }
 
 class TestSplitModel {
@@ -23,7 +21,7 @@ void main() {
     () {
       late Rank rank;
 
-      List<TestModel> valuesList = [];
+      var valuesList = <TestModel>[];
 
       // Values for generated test
       valuesList.add(TestModel(prev: '', next: '', expected: 'ñ'));
@@ -76,7 +74,7 @@ void main() {
         rank = Rank();
       });
 
-      for (TestModel value in valuesList) {
+      for (var value in valuesList) {
         test(
           '"${value.prev}" , "${value.next}" : "${value.expected}"',
           () => expect(rank.generate(previous: value.prev, next: value.next),
@@ -88,7 +86,7 @@ void main() {
 
   group('Split by shorter', () {
     late Rank rank;
-    List<TestSplitModel> valuesList = [];
+    var valuesList = <TestSplitModel>[];
 
     valuesList.add(
       TestSplitModel(
@@ -133,7 +131,7 @@ void main() {
       rank = Rank();
     });
 
-    for (TestSplitModel value in valuesList) {
+    for (var value in valuesList) {
       test(
           '"${value.prev}" , "${value.next}" : "${value.expected}"',
           () => expect(
@@ -147,7 +145,7 @@ void main() {
     () {
       late Rank rank;
 
-      List<TestModel> valuesList = [];
+      var valuesList = <TestModel>[];
       valuesList.add(TestModel(prev: '', next: '', expected: ''));
       valuesList.add(TestModel(prev: 'a', next: 'n', expected: 'h'));
       valuesList.add(TestModel(prev: 'b', next: 'b', expected: 'b'));
@@ -160,7 +158,7 @@ void main() {
           .add(TestModel(prev: 'abecedario', next: 'logic', expected: 'g'));
 
       setUp(() => rank = Rank());
-      for (TestModel value in valuesList) {
+      for (var value in valuesList) {
         test(
             '"${value.prev}" , "${value.next}" : "${value.expected}"',
             () => expect(
@@ -171,8 +169,8 @@ void main() {
 
   group('Rank sufix', () {
     late Rank rank;
-    
-    List<TestModel> valuesList = [];
+
+    var valuesList = <TestModel>[];
     valuesList.add(TestModel(prev: '', next: '', expected: 'ñ'));
     valuesList.add(TestModel(prev: 'l', next: '', expected: 'r'));
     valuesList.add(TestModel(prev: '', next: 'aab', expected: 'aaañ'));
@@ -188,7 +186,7 @@ void main() {
 
     setUp(() => rank = Rank());
 
-    for (TestModel value in valuesList) {
+    for (var value in valuesList) {
       test('"${value.prev}" , "${value.next}" : "${value.expected}"',
           () => expect(rank.suffix(value.prev, value.next), value.expected));
     }

@@ -1,7 +1,7 @@
 import 'package:rank/rank.dart';
 
 void main() {
-  Rank rank = Rank();
+  var rank = Rank();
 
   print(rank.generate()); // Expected: ñ
 

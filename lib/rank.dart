@@ -1,17 +1,27 @@
 library rank;
 
-import 'package:rank/src/utils/utils.dart';
+import './src/utils/utils.dart';
 
+/// Returned return by the function [prefix], contains
+/// the [response] in string and [hasSuffix] bool, when
+/// the rank generated needs a suffix.
 class ResultPrefix {
+  /// The response of [prefix] in String
   final String response;
+
+  /// When the [response] needs a suffix
   final bool hasSuffix;
 
+  /// Constructor of [ResultPrefix] required [response] and [hasSuffix]
   ResultPrefix({required this.response, required this.hasSuffix});
 }
 
+/// Main class, import this for using the methods of this plugin
 class Rank {
   /// Possible ranking values (Range)
   String wildcard = 'a';
+
+  /// The range of values that must be use to [generate] the rank.
   String alphabet = 'bcdefghijklmnñopqrstuvwxyz';
 
   /// Generate a rank based at their neighbors, the [previous] element and [next] element.
@@ -19,7 +29,7 @@ class Rank {
     String rankGenerated;
 
     if (previous.length == next.length) {
-      ResultPrefix resultPrefix = prefix(previous, next);
+      var resultPrefix = prefix(previous, next);
 
       rankGenerated = resultPrefix.response;
 
@@ -34,7 +44,7 @@ class Rank {
     var splitted = splitByShorter(bigger: order[0], shorter: order[1]);
 
     if (previous.length > next.length) {
-      ResultPrefix resultPrefix = prefix(splitted[0], splitted[2]);
+      var resultPrefix = prefix(splitted[0], splitted[2]);
       rankGenerated = resultPrefix.response;
 
       if (resultPrefix.hasSuffix) {
@@ -43,7 +53,7 @@ class Rank {
 
       return rankGenerated;
     }
-    //By default previous.length < next.length
+    // By default previous.length < next.length
 
     if (next.last() == alphabet.first()) {
       var pref = next.substring(0, next.length - 1);
@@ -54,7 +64,7 @@ class Rank {
       //rankGenerated += alphabet.first() + alphabet.mean();
     }
 
-    ResultPrefix resultPrefix = prefix(splitted[2], splitted[0]);
+    var resultPrefix = prefix(splitted[2], splitted[0]);
     rankGenerated = resultPrefix.response;
 
     if (resultPrefix.hasSuffix) {
@@ -69,8 +79,8 @@ class Rank {
   /// and if it exists, the first residue char of the [bigger].
   List<String> splitByShorter(
       {required String bigger, required String shorter}) {
-    int limit = shorter.length;
-    List<String> response = [];
+    var limit = shorter.length;
+    var response = <String>[];
 
     response.add(bigger.substring(0, limit));
     response.add(bigger.substring(limit));
@@ -83,10 +93,8 @@ class Rank {
   }
 
   /// Compare two strings by your length and return a list
-  /// with the bigger and shorter.
-
+  /// with the bigger at the first place and shorter at the second place.
   List<String> orderByLength({required String one, required String two}) {
-
     if (one.length > two.length) {
       return [one, two];
     } else {
@@ -97,13 +105,13 @@ class Rank {
   /// Return a string between [previousRank] and [nextRank]
   /// as a condition, both params must be of the same length
   ResultPrefix prefix(String previousRank, String nextRank) {
-    String response = '';
+    var response = '';
 
     // if (previousRank.isEmpty) return '';
     // if (nextRank.isEmpty) return '';
 
-    for (int i = 0; i < previousRank.length; i++) {
-      var current;
+    for (var i = 0; i < previousRank.length; i++) {
+      var current = '';
 
       if (nextRank.at(i) == wildcard) {
         current = wildcard;
@@ -126,9 +134,15 @@ class Rank {
     return ResultPrefix(response: response, hasSuffix: true);
   }
 
+  /// It creates the part of the ranking when one of the neighbors
+  /// is bigger than the other, i.e. at least one of the two parameters
+  /// ([previousRank] or [nextRank])
+  /// will always be empty, when it contains a [wildcard],
+  /// it has to preserve it.
   String suffix(String previousRank, String nextRank) {
     if (previousRank.isEmpty && nextRank.isEmpty) return alphabet.mean();
 
+    // Contains wildcard
     if (previousRank.contains(wildcard) || nextRank.contains(wildcard)) {
       if (previousRank.isEmpty) {
         // Previous is empty

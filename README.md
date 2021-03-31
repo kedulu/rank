@@ -3,7 +3,7 @@
 A Dart package that helps to implement a string index.
 
 ## Overview
-__Before:__
+### __Before:__
 ```dart
 class Element {
   const Element(..., this.position);
@@ -22,6 +22,7 @@ With a order number based ranking system, re-ordering a element of a list may re
 | pear      | 4                     |
 | raspberry | 5                     |
 
+---
 Well, let's try adding zeros.
 
 | element   | position              |
@@ -34,7 +35,8 @@ Well, let's try adding zeros.
 
 What if we don't use numbers?
 
-__Using__ `rank`
+---
+### __With__ `rank`
 ```dart
 class Element {
   const Element(..., this.rank);
@@ -66,7 +68,7 @@ SELECT * FROM "_" ORDER BY "rank";
 First, add the plugin `rank` to your `pubspec.yaml` file:
 ```yaml
 dependencies:
-  rank: ^0.1.0
+  rank: ^0.1.1
 ```
 
 Import `rank` in files that it will be used:
